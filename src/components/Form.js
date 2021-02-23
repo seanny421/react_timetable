@@ -1,13 +1,24 @@
 import React from "react";
+var uniqid = require("uniqid");
 
-
-function Form(){
-
+function Form( {setInputText, inputText, setTodos, todos}){
+    function inputTextHandler(e){
+        setInputText(e.target.value);
+    };
+    //function executes once subimt button is pressed
+    //adds todo to state
+    function submitTodoHandler(e){
+        e.preventDefault();
+        setTodos([
+            ...todos, {text: inputText, id: uniqid('todo-id-'), completed: false},
+        ]);
+        setInputText('');
+    }
 
     return(
         <form>
-            <input type="text" className="todo-input"/>
-            <button className="todo-button" type="submit">
+            <input value={inputText} onChange={inputTextHandler} type="text" className="todo-input"/>
+            <button onClick={submitTodoHandler} className="todo-button" type="submit">
                 <i className="fas fa-plus-square"></i>
             </button>
             <div className="select">

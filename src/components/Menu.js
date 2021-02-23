@@ -7,7 +7,7 @@ function Menu( {menu, setMenu} ) {
     }
     return(
         <div className="menu-container">
-            <div onClick={toggleMenu} className="hamburger-container">
+            <div onClick={toggleMenu} className={`hamburger-container ${menu ? "change" : ""}`}>
                 <div className="bar1"></div>
                 <div className="bar2"></div>
                 <div className="bar3"></div>

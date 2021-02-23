@@ -15,7 +15,6 @@ function App() {
 
   document.addEventListener('DOMContentLoaded', () =>{
     setToday(getToday());
-
   });
 
   function getToday(){

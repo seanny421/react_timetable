@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Todo({todos, setTodos, todoText, todo}){
+function Todo({todos, setTodos, todoText, todo, today}){
     const [isDeleted, setIsDeleted] = useState(false);
 
     function deleteHandler(e){
@@ -10,11 +10,17 @@ function Todo({todos, setTodos, todoText, todo}){
     };
     
     function completedHandler(){
-        console.log("completed");
+        setTodos(todos.map((item) => {
+            if(item.id === todo.id){
+                return{
+                    ...item, completed: !item.completed
+                }
+            }
+            return item;
+        }))
     };
-
     return(
-        <div className={`todo ${isDeleted ? "fall": ""}`}>
+        <div className={`todo ${isDeleted ? "fall": ""} ${todo.completed ? "completed": ""}`}>
             <li className={`todo-item`}>{todoText}</li>
             <button onClick={completedHandler} className="complete-btn">
                 <i className="fas fa-check"></i>
@@ -24,7 +30,6 @@ function Todo({todos, setTodos, todoText, todo}){
             </button>
         </div>
     );
-
 };
 
 

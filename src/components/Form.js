@@ -1,18 +1,22 @@
 import React from "react";
 var uniqid = require("uniqid");
 
-function Form( {setInputText, inputText, setTodos, todos}){
+function Form( {setInputText, inputText, setTodos, todos, today, setDay, day}){
     function inputTextHandler(e){
         setInputText(e.target.value);
     };
-    //function executes once subimt button is pressed
+    //function executes once submit button is pressed
     //adds todo to state
     function submitTodoHandler(e){
         e.preventDefault();
         setTodos([
-            ...todos, {text: inputText, id: uniqid('todo-id-'), completed: false},
+            ...todos, {text: inputText, id: uniqid('todo-id-'), completed: false, day: day},
         ]);
         setInputText('');
+    }
+
+    function daySwitchHandler(e){
+        setDay(e.target.value);
     }
 
     return(
@@ -22,15 +26,15 @@ function Form( {setInputText, inputText, setTodos, todos}){
                 <i className="fas fa-plus-square"></i>
             </button>
             <div className="select">
-                <select name="todos" className="filter-todo">
-                    <option value="all">Today</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                    <option value="saturday">Saturday</option>
-                    <option value="sunday">Sunday</option>
+                <select onChange={daySwitchHandler} name="todos" className="filter-todo">
+                    <option value={today}>Today</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
                 </select>
             </div>
         </form>
